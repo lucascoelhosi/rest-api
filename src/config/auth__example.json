@@ -1,0 +1,6 @@
+// The purpose of this complementary token is to become unique
+// in generating the authentication token, and thus make it more secure
+
+{
+    "secret": "" // "your complement token (aleatory generate)"
+}
