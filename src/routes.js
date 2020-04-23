@@ -12,7 +12,9 @@ const routes = express.Router();
 
 routes.get('/users', authMiddleware, UserController.index);
 routes.post('/users/new', UserController.store);
+
 routes.post('/users/auth', AuthController.auth);
+routes.post('/users/forgot_password', AuthController.forgot);
 
 routes.get('/users/:user_id/adresses', AdressController.index);
 routes.post('/users/:user_id/adresses/new', AdressController.store);

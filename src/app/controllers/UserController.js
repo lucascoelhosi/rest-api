@@ -1,5 +1,7 @@
-const User = require('../../models/User');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const authConfig = require('../../config/auth');
 
 module.exports = {
     async index (req, res) {
@@ -25,7 +27,7 @@ module.exports = {
             user.password_hash = undefined;
             
             const token = jwt.sign({ id: user.id }, authConfig.secret, {
-                expiresIn: 86400,
+                expiresIn: authConfig.experisIn,
             });
             
             return res.json({user, token});

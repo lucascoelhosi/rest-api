@@ -6,10 +6,14 @@ class User extends Model {
             name: DataTypes.STRING,
             email: DataTypes.STRING,
             password_hash: DataTypes.STRING,
+            password_reset_token: DataTypes.STRING,
+            password_reset_expires: DataTypes.DATE,
         }, {
             scopes: {
                 withoutPassword: {
-                  attributes: { exclude: ['password_hash'] },
+                    attributes: { 
+                        exclude: ['password_hash', 'password_reset_token', 'password_reset_expires'] 
+                    },
                 }
             },
             sequelize: connection
