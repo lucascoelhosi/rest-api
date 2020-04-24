@@ -22,11 +22,13 @@ module.exports = {
                 return res.status(400).send({ error: 'Invalid Password' });
             }
 
-            user.password_hash = undefined;
-
             const token = jwt.sign({ id: user.id }, authConfig.secret, {
                 expiresIn: authConfig.experisIn,
             });
+
+            user.password_hash = undefined;
+            user.password_reset_token = undefined;
+            user.password_reset_expires = undefined;
             
             return res.json({ user, token });
         } catch (err) {
@@ -67,6 +69,38 @@ module.exports = {
                 return res.send();
             });
 
+        } catch (err) {            
+            return res.status(400).send({ error: 'Error in forgor password, try again' });
+        }
+    },
+
+    async reset (req, res) {
+        const { email, token, password_hash } = req.body;
+
+        try {
+            const user = await User.findOne({ where: {email: email } });
+
+            if (!user) {
+                return res.status(400).send({ error: 'User not found' });
+            }
+
+            if (token !== user.password_reset_token) {
+                return res.status(400).send({ error: 'Token invalid' });
+            }
+
+            const now = new Date();
+
+            if (now > user.password_reset_expires) {
+                return res.status(400).send({ error: 'Token expired, generate a new one' });
+            }
+
+            // password encryption
+            const hash = await bcrypt.hash(password_hash, 10);
+            user.password_hash = hash;
+
+            await user.save();
+
+            res.send();
         } catch (err) {
             console.log(err);
             return res.status(400).send({ error: 'Error in forgor password, try again' });

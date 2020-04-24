@@ -15,6 +15,7 @@ routes.post('/users/new', UserController.store);
 
 routes.post('/users/auth', AuthController.auth);
 routes.post('/users/forgot_password', AuthController.forgot);
+routes.post('/users/reset_password', AuthController.reset);
 
 routes.get('/users/:user_id/adresses', AdressController.index);
 routes.post('/users/:user_id/adresses/new', AdressController.store);
