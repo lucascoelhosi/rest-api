@@ -11,13 +11,13 @@ const AuthController = require('./app/controllers/AuthController');
 const routes = express.Router();
 
 routes.get('/users', authMiddleware, UserController.index);
-routes.post('/users/new', UserController.store);
+routes.post('/users/register', UserController.store);
 
 routes.post('/users/auth', AuthController.auth);
 routes.post('/users/forgot_password', AuthController.forgot);
 routes.post('/users/reset_password', AuthController.reset);
 
-routes.get('/users/:user_id/adresses', AdressController.index);
+routes.get('/users/:user_id/adresses', authMiddleware, AdressController.index);
 routes.post('/users/:user_id/adresses/new', AdressController.store);
 
 routes.get('/users/:user_id/techs', TechController.index);
