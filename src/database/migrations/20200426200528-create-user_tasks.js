@@ -2,17 +2,17 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('project_tasks', { 
+    return queryInterface.createTable('user_tasks', { 
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      project_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'projects', key: 'id' },
+        references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
@@ -35,6 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('project_tasks');
+    return queryInterface.dropTable('user_tasks');
   }
 };
