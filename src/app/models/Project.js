@@ -4,7 +4,6 @@ class Project extends Model {
     static init(connection) {
         super.init({
             title: DataTypes.STRING,
-            completed: DataTypes.BOOLEAN,
         }, {
             sequelize: connection,
             tableName: 'projects'

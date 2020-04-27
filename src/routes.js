@@ -7,6 +7,7 @@ const AdressController = require('./app/controllers/AdressController');
 const TechController = require('./app/controllers/TechController');
 const ReportController = require('./app/controllers/ReportController');
 const AuthController = require('./app/controllers/AuthController');
+const ProjectController = require('./app/controllers/ProjectController');
 
 const routes = express.Router();
 
@@ -23,6 +24,10 @@ routes.post('/users/:user_id/adresses/new', AdressController.store);
 routes.get('/users/:user_id/techs', TechController.index);
 routes.post('/users/:user_id/techs/new', TechController.store);
 routes.delete('/users/:user_id/techs/delete', TechController.delete);
+
+routes.get('/projects', authMiddleware, ProjectController.index);
+routes.get('/projects/show', authMiddleware, ProjectController.show);
+routes.post('/projects/new', authMiddleware, ProjectController.store);
 
 routes.get('/report', ReportController.show);
 
