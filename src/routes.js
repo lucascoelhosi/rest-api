@@ -8,6 +8,7 @@ const TechController = require('./app/controllers/TechController');
 const ReportController = require('./app/controllers/ReportController');
 const AuthController = require('./app/controllers/AuthController');
 const ProjectController = require('./app/controllers/ProjectController');
+const TaskController = require('./app/controllers/TaskController');
 
 const routes = express.Router();
 
@@ -28,6 +29,10 @@ routes.delete('/users/:user_id/techs/delete', TechController.delete);
 routes.get('/projects', authMiddleware, ProjectController.index);
 routes.get('/projects/show', authMiddleware, ProjectController.show);
 routes.post('/projects/new', authMiddleware, ProjectController.store);
+
+routes.get('/tasks', authMiddleware, TaskController.index);
+routes.get('/tasks/show', authMiddleware, TaskController.show);
+routes.post('/tasks/new', authMiddleware, TaskController.store);
 
 routes.get('/report', ReportController.show);
 

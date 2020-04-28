@@ -24,8 +24,10 @@ yarn install
 
 #### Arquivo de configuração .env
 
+Criar o arquivo .env com base no .env.example e inserir suas configurações
+
 ```sh
-Criar o arquivo .env com base no .env.example
+cp .env.example .env
 ```
 
 #### Rodando as migrations do banco de dados
@@ -44,7 +46,7 @@ src => config => database.js
 
 seguindo as regras de configuração da documentação oficial do [Sequelize](https://sequelize.org/master/)
 
-### Rodando a aplicação local (dev)
+#### Rodando a aplicação local (dev)
 
 ```sh
 yarn dev

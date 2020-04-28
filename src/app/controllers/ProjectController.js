@@ -2,8 +2,6 @@ const Project = require('../models/Project');
 
 module.exports = {
     async index (req, res) {
-        // const { user_id } = req.params;
-
         const projects = await Project.findAll();
 
         return res.json(projects);
@@ -11,6 +9,9 @@ module.exports = {
 
     async show (req, res) {
         const user_id = req.userId;
+
+        if (!user_id)
+            return res.status(400).send({ error: 'User Not Found' })
 
         const projects = await Project.findAll(
             { where: { user_id : user_id }});
@@ -41,7 +42,7 @@ module.exports = {
             return res.json(project);
         } catch (err) {
             console.log(err);
-            return res.status(400).send({ error: 'Registration failed' });
+            return res.status(400).send({ error: 'Create Project failed' });
         }
     }
 }
