@@ -9,6 +9,7 @@ const ReportController = require('./app/controllers/ReportController');
 const AuthController = require('./app/controllers/AuthController');
 const ProjectController = require('./app/controllers/ProjectController');
 const TaskController = require('./app/controllers/TaskController');
+const UserTaskController = require('./app/controllers/UserTaskController');
 
 const routes = express.Router();
 
@@ -33,6 +34,8 @@ routes.post('/projects/new', authMiddleware, ProjectController.store);
 routes.get('/tasks', authMiddleware, TaskController.index);
 routes.get('/tasks/show', authMiddleware, TaskController.show);
 routes.post('/tasks/new', authMiddleware, TaskController.store);
+routes.post('/tasks/user/new', authMiddleware, UserTaskController.store);
+routes.delete('/tasks/user/remove', authMiddleware, UserTaskController.delete);
 
 routes.get('/report', ReportController.show);
 
